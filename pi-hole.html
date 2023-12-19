@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Deploying Pi-Hole with Docker</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <a href="index.html" class="logo">SimpleSysAdmin</a>
+        </header>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul class="links">
+                <li class="active"><a href="index.html">Portfolio</a></li>
+                <li class="active"><a href="contact.html">Contact</a></li>
+            </ul>
+            <ul class="icons">
+                <li><a href="https://www.linkedin.com/in/mathew-titus/" class="icon brands alt fa-linkedin"><span
+                            class="label">Linkedin</span></a></li>
+                <li><a href="https://github.com/amcomp" class="icon brands fa-github"><span class="label">GitHub</span></a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main -->
+        <div id="main">
+
+            <!-- Post -->
+            <section class="post">
+                <header class="major">
+                    <h2>How to Deploy Pi-Hole</h2>
+                    <span class="date"> 12/10/2023 </span>
+                </header>
+                <body>
+
+                    <a href="pi-hole.html" class="image main"><img src="/images/pexels-nishant-aneja-2955816.jpg" alt="" /></a>.
+                    
+                    <p>In my Homelab, I've deployed several applications using Docker, and one of them is Pi-Hole. This versatile application serves as a DHCP and DNS Server, providing essential functions for network management. Notably, Pi-Hole is capable of acting as a DNS Sinkhole. This feature aids in protecting against malware and phishing threats while offering effective control over network traffic, such as blocking advertisements. The result is an optimized network speed and an additional layer of security for a more robust homelab environment.</p>
+                    
+                    <p>In my environment, if I am deploying one container for short-term use, I prefer docker-compose. This tool is great for deployments like this as it uses YAML files which are straightforward to read.</p>
+                    
+                    <h2>Prerequisites:</h2>
+                    
+                    <p>Ensure you have the necessary prerequisites:</p>
+                    
+                    <ol>
+                        <li><strong>Docker:</strong>
+                            We will be deploying Pi-hole as a container, using Docker. You can install Docker using the command <code> sudo apt install docker.io </code>
+                        </li>
+                    
+                        <li><strong>Docker-Compose:</strong>
+                            We will deploy our containerized app using a method known as infrastructure as code (IaC). For this, we need Docker Compose, which is installed using <code> sudo apt install docker-compose</code>
+                        </li>
+                    
+                        <li><strong>Sudo privileges:</strong>
+                            Having sudo privileges is important for installing and running Docker.
+                        </li>
+                    </ol>
+                    <h2><strong>Writing the docker-compose file:</strong></h2>
+                    <p> 
+                    Below is the basic configuration file for a pi-hole deployment, Write this in your favorite text editor or IDE (I use VSCode).
+                    When you finish writing the file, name the file docker-compose.yml and save.
+                    
+                    </p>
+                    <pre>
+                        <code>
+                    version: '3'
+                    services:
+                        pihole:
+                            container_name: pihole
+                            image: pihole/pihole:2023.11.0
+                            ports:
+                                - "53:53/tcp" #DNS
+                                - "53:53/udp" #DNS
+                                - "67:67/udp" #DHCP
+                                - "80:80/tcp" #HTTP
+                                - "443:443/tcp" #HTTPS
+                            environment:
+                                TZ: 'America/New_York' <!-- Set your timezone -->
+                                WEBPASSWORD: '' <!-- Set a secure password for the Pi-hole web interface -->
+                                ServerIP: '' <!-- Set your server's IP address -->
+                            volumes:
+                                - './pihole/:/etc/pihole/'
+                                - './dnsmasq.d/:/etc/dnsmasq.d/'
+                            cap_add:
+                                - NET_ADMIN
+                            restart: unless-stopped
+                        </code>
+                    </pre>
+                    
+                    <p>Let's go over what is happening in this configuration.</p>
+                    
+                    <ul>
+                        <li><strong>Version:</strong> This specifies the version of docker-compose to use, which is the latest at the time of writing.</li>
+                        <li><strong>Image:</strong> Tells Docker what image and version to pull for the application. You can specify “latest” instead of a version number, but I prefer controlling the updates on my container deployments.</li>
+                        <li><strong>Ports:</strong> Tells Docker what firewall ports the application will be operating on. Port 67 will only be necessary if using the DHCP functionality of Pi-Hole. Port 53 will need to be specified in TCP and UDP as DNS operates in both.</li>
+                        <li><strong>WEBPASSWORD:</strong> This will be your password to sign in to the app. You can put the code here, but in production use proper password management strategies.</li>
+                        <li><strong>Volumes:</strong> Pi-Hole uses a couple of volumes to operate; this section outlines where to put them.</li>
+                        <li><strong>Cap_Add:</strong> Grants the NET_ADMIN capability, necessary for Pi-Hole to manipulate network settings.</li>
+                    </ul>
+                    
+                    <p>
+                        Deploying with docker-compose is simple. These directions are for Linux, but Docker and docker-compose are available for Windows and Mac as well, but configurations will be a little different. Whichever operating system you choose, be sure it has a static IP address set. This will be important when configuring other devices to use your server for DNS.
+                    </p>
+                    
+                    <p>Write your docker-compose file and name it docker-compose.yml and save the file. On the command line, navigate to the folder you stored your file.</p>
+                    
+                    <pre>
+                        <code>
+                    $ docker-compose up -d
+                        </code>
+                    </pre>
+                    
+                    <p><strong>-d :</strong> This will tell Docker to run the container independent of the current command line session. Not using this is fine, but the container will only run until you close out the session.</p>
+                    
+                    <p>After some time, you will see the specified image pulled and deployed. Finally, in your browser, navigate to 127.0.0.1, and you will connect to your server and log in with the password you specified in the docker-compose.yml file.</p>
+                    
+                    <p>Once logged in, there are many configurations to make, but the application in its default form is ready to go for blocking advertisements. Just push the enable button, and it's active! Set your device's DNS server to the IP address of the computer hosting your Pi-hole container. If you're not using Pi-hole as your DHCP server, you can also set your network’s DHCP server (usually your SOHO router in a homelab) to push your Pi-hole IP address to all your devices automatically.</p>
+                    
+                    <p>Helpful links:</p>
+                    <ul>
+                        <li><a href="https://docs.docker.com/desktop/">For Docker set-up</a></li>
+                        <li><a href="https://hub.docker.com/r/pihole/pihole">For Pi-Hole Docker reference</a></li>
+                        <p>The full code from my <a href="https://github.com/amcomp/CodeonSite/tree/main/Pi-Hole" target="_blank">GitHub</a></p>
+                    </ul>
+                    
+                    </body>
+                    </section>
+                    
+                    </div>
+                    
+
+        <!-- Footer -->
+        <footer id="footer">
+            <section class="split contact">
+                <section>
+                    <h3>Email</h3>
+                    <p><a href="mailto:mathew.titus@outlook.com">mathew.titus@outlook.com</a></p>
+                </section>
+                <section>
+                    <h3>Social</h3>
+                    <ul class="icons">
+                        <li><a href="https://www.linkedin.com/in/mathew-titus/" class="icon brands alt fa-linkedin"><span
+                                    class="label">Linkedin</span></a></li>
+                        <li><a href="https://github.com/amcomp" class="icon brands fa-github"><span
+                                    class="label">GitHub</span></a></li>
+                    </ul>
+                </section>
+            </section>
+        </footer>
+
+				<!-- Copyright -->
+				<div id="copyright">
+					<ul><li> Portfolio </li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+				</div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

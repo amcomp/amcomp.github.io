@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <title>Deploying Printers with PowerShell</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <a href="index.html" class="logo">SimpleSysAdmin</a>
+        </header>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul class="links">
+                <li class="active"><a href="index.html">Portfolio</a></li>
+                <li class="active"><a href="contact.html">Contact</a></li>
+            </ul>
+            <ul class="icons">
+                <li><a href="https://www.linkedin.com/in/mathew-titus/" class="icon brands alt fa-linkedin"><span
+                            class="label">Linkedin</span></a></li>
+                <li><a href="https://github.com/amcomp" class="icon brands fa-github"><span class="label">GitHub</span></a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main -->
+        <div id="main">
+
+            <!-- Post -->
+            <section class="post">
+                <header class="major">
+                    <h2>Deploying Printers with PowerShell</h2>
+                    <span class="date">12/12/2023</span>
+                </header>
+
+
+<body>
+    <a href="pi-hole.html" class="image main"><img src="images/pexels-mikhail-nilov-6963944.jpg" alt="" /></a>
+
+    <p>
+    As a Systems Administrator, managing printers and adding them to user devices is a common task.
+    Harnessing the power of PowerShell allows you to automate this process, ensuring accuracy and efficiency in your configurations. As your IT environment grows, the need for automation becomes increasingly essential.
+    </p>
+
+    <h2>Prerequisites:</h2>
+
+    <p>Before delving into the automation process, ensure you have the necessary prerequisites:</p>
+
+    <ol>
+        <li><strong>Print Drivers:</strong> Have the required print drivers installed on your computer or available in a known location. For this demonstration, we'll reference default Windows driver locations, but the source may vary depending on your printer's manufacturer.</li>
+
+        <li><strong>Printer Setup:</strong> Add the printer to your computer beforehand. This step simplifies the process of locating the driver.</li>
+
+        <li><strong>Printer IP Address:</strong> Know the static IP address of the printer you intend to work with. Statically assigning the address ensures a consistent target for your PowerShell script.</li>
+    </ol>
+
+    <h2>Gathering Driver Details:</h2>
+
+    <p>To automate printer deployment, start by gathering details about the print driver. Open PowerShell and run the following command:</p>
+
+    <pre><code>Get-PrinterDriver | Select-Object Name, InfPath</code></pre>
+
+    <p>This command outputs a table with information about connected printers, including the <code>.inf</code> file path. Identify your target printer in the list and note the associated <code>.inf</code> file path.</p>
+
+    <h2>Adding the Driver to the Driver Store:</h2>
+
+    <p>Ensure the driver is added to the driver store correctly using the following command:</p>
+
+    <pre><code>Pnputil /add-driver "your inf file path"</code></pre>
+
+    <h2>Extracting Driver Name from the .inf File:</h2>
+
+    <p>Open the <code>.inf</code> file using Notepad to extract the driver name. Scroll down to find your printer in the list, and copy the name with quotes.</p>
+
+    <pre><code>notepad "your inf file path"</code></pre>
+
+    <h2>Adding the Print Driver:</h2>
+
+    <p>Now, add the print driver to the script with the following command:</p>
+
+    <pre><code>Add-PrinterDriver -Name "Your Driver's Name" -InfPath "Your inf file path"</code></pre>
+
+    <h2>Adding the Printer Port:</h2>
+
+    <p>Add the printer port and specify the printer's IP address. A static IP for the printer streamlines the process.</p>
+
+    <pre><code>Add-PrinterPort -Name "Any Name You Want" -PrinterHostAddress x.x.x.x</code></pre>
+
+    <p>Replace <code>x.x.x.x</code> with the printer's IP address.</p>
+
+    <h2>Adding the Printer:</h2>
+
+    <p>Finally, add the printer using the following command:</p>
+
+    <pre><code>Add-Printer -DriverName "Your Driver's Name" -Name "Any Name You Want" -PortName "Your port name from the last direction"</code></pre>
+
+    <p>Once the script is executed, you can immediately observe the printer using the <code>Get-Printer</code> command. It might take a moment to appear in the "Printers and Scanners" settings. After running through this process once, you will have the information, and will not need to go through it until the next printer you need to automate. In conclusion, you've successfully automated your printing deployment, and this script serves as a foundation for building more complex workflows or accommodating specific naming structures. PowerShell is a robust tool in an admin's arsenal, and automating printing deployments is just one example of its versatility.</p>
+
+
+    <p>Helpful links:</p>
+    <ul>
+        <li><a href="https://learn.microsoft.com/en-us/powershell/module/printmanagement/add-printer?view=windowsserver2022-ps">Add-Printer docs</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/powershell/module/printmanagement/add-printerdriver?view=windowsserver2022-ps">Add-PrinterDriver docs</a></li>
+        <li>The Full code from my <a href="https://github.com/amcomp/CodeonSite/" target="_blank">GitHub</a></li>
+    </ul>
+</body>
+
+</html>
+
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <section class="split contact">
+                <section>
+                    <h3>Email</h3>
+                    <p><a href="mailto:mathew.titus@outlook.com">mathew.titus@outlook.com</a></p>
+                </section>
+                <section>
+                    <h3>Social</h3>
+                    <ul class="icons">
+                        <li><a href="https://www.linkedin.com/in/mathew-titus/" class="icon brands alt fa-linkedin"><span
+                                    class="label">Linkedin</span></a></li>
+                        <li><a href="https://github.com/amcomp" class="icon brands fa-github"><span
+                                    class="label">GitHub</span></a></li>
+                    </ul>
+                </section>
+            </section>
+        </footer>
+
+				<!-- Copyright -->
+				<div id="copyright">
+					<ul><li> Portfolio </li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+				</div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
