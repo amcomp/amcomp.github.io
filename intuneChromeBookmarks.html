@@ -43,16 +43,30 @@
                 </header>
                     <h1> Configuring Chrome Bookmarks in Intune </h1>
                 <body>
+                    <a href="pi-hole.html" class="image main"><img src="/images/pexels-deivis-sandoval-16553326.jpg" alt="" /></a>
+
                 <p>
-                    &nbsp&nbsp&nbsp&nbsp&nbsp;Intune is a great tool for managing Chrome. 
+                    Intune is a great tool for managing Chrome. 
                     Creating permanent bookmarks for your users can help them find 
                     company web resources much quicker. Most links can be deployed with Intune and used for Google Chrome Bookmarks
-                    In this article we will look at how to configure the policy. Requirements are a Subscription that inludes Intune, and a text editor
-                    (I prefer VSCode)
+                    In this article we will look at how to configure the policy.
                 </p>
 
+                <h2>Prerequisites:</h2>
+
+                    <p>Before delving into the automation process, ensure you have the necessary prerequisites:</p>
+
+                        <ol>
+                            <li><strong>Access to Intune:</strong> If you are doing this at home in your own envrionment, There are ways of deploying your own Entra and Intune instances.</li>
+
+                            <li><strong>Another Endpoint:</strong> This can be your own computer or another one, it just needs to be enrolled in Intune.</li>
+                            
+                            <li><strong>A Text Editor or IDE:</strong> Notepad or VSCode. </li>
+
+                        </ol>
+
                 <p> 
-                    &nbsp&nbsp&nbsp&nbsp&nbsp;In Endpoint Manager, 
+                    In Endpoint Manager, 
                     Navigate to Devices > Configuration Profiles, Then Select Create > New policy
                 </p>
 

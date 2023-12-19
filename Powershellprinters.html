@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Automating Printer Deployments - Mathew Titus</title>
+    <title>Deploying Printers with PowerShell</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
@@ -39,15 +39,18 @@
             <!-- Post -->
             <section class="post">
                 <header class="major">
-                    <h2>Automating Printer Deployments with PowerShell</h2>
+                    <h2>Deploying Printers with PowerShell</h2>
                     <span class="date">12/12/2023</span>
                 </header>
-                <!DOCTYPE html>
+
 
 <body>
     <a href="pi-hole.html" class="image main"><img src="/images/pexels-hatice-baran-13762139(1).jpg" alt="" /></a>
 
-    <p>As a Systems Administrator, managing printers and efficiently adding them to user devices is a common task. Harnessing the power of PowerShell allows you to automate this process, ensuring accuracy and speed in your configurations. As your IT environment grows, the need for automation becomes increasingly essential.</p>
+    <p>
+    As a Systems Administrator, managing printers and adding them to user devices is a common task.
+    Harnessing the power of PowerShell allows you to automate this process, ensuring accuracy and efficiency in your configurations. As your IT environment grows, the need for automation becomes increasingly essential.
+    </p>
 
     <h2>Prerequisites:</h2>
 
@@ -67,7 +70,7 @@
 
     <pre><code>Get-PrinterDriver | Select-Object Name, InfPath</code></pre>
 
-    <p>This command outputs a table with information about connected printers, including the crucial <code>.inf</code> file path. Identify your target printer in the list and note the associated <code>.inf</code> file path.</p>
+    <p>This command outputs a table with information about connected printers, including the <code>.inf</code> file path. Identify your target printer in the list and note the associated <code>.inf</code> file path.</p>
 
     <h2>Adding the Driver to the Driver Store:</h2>
 
@@ -79,7 +82,7 @@
 
     <p>Open the <code>.inf</code> file using Notepad to extract the driver name. Scroll down to find your printer in the list, and copy the name with quotes.</p>
 
-    <pre><code>Notepad "your inf file path"</code></pre>
+    <pre><code>notepad "your inf file path"</code></pre>
 
     <h2>Adding the Print Driver:</h2>
 
@@ -103,13 +106,12 @@
 
     <p>Once the script is executed, you can immediately observe the printer using the <code>Get-Printer</code> command. It might take a moment to appear in the "Printers and Scanners" settings. After running through this process once, you will have the information, and will not need to go through it until the next printer you need to automate. In conclusion, you've successfully automated your printing deployment, and this script serves as a foundation for building more complex workflows or accommodating specific naming structures. PowerShell is a robust tool in an admin's arsenal, and automating printing deployments is just one example of its versatility.</p>
 
-    <p>The Full code from my <a href="https://github.com/amcomp/CodeonSite/tree/main/AddPrinter" target="_blank">GitHub</a></p>
 
     <p>Helpful links:</p>
     <ul>
         <li><a href="https://learn.microsoft.com/en-us/powershell/module/printmanagement/add-printer?view=windowsserver2022-ps">Add-Printer docs</a></li>
         <li><a href="https://learn.microsoft.com/en-us/powershell/module/printmanagement/add-printerdriver?view=windowsserver2022-ps">Add-PrinterDriver docs</a></li>
-        <p>The Full code from my <a href="https://github.com/amcomp/CodeonSite/tree/main/Pi-Hole" target="_blank">GitHub</a></p>
+        <li>The Full code from my <a href="https://github.com/amcomp/CodeonSite/" target="_blank">GitHub</a></li>
     </ul>
 </body>
 
