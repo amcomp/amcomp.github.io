@@ -1,1 +1,1 @@
-# This Repository stores any code that I reference in articles.
+# This Repository is for my portfolio website.
