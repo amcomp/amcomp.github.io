@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Basci Ansible Set-up </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <a href="index.html" class="logo">SimpleSysAdmin</a>
+        </header>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul class="links">
+                <li class="active"><a href="index.html">Portfolio</a></li>
+                <li class="active"><a href="contact.html">Contact</a></li>
+            </ul>
+            <ul class="icons">
+                <li><a href="https://www.linkedin.com/in/mathew-titus/" class="icon brands alt fa-linkedin"><span
+                            class="label">Linkedin</span></a></li>
+                <li><a href="https://github.com/amcomp" class="icon brands fa-github"><span class="label">GitHub</span></a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main -->
+        <div id="main">
+
+            <!-- Post -->
+            <section class="post">
+                <header class="major">
+                    <h2>How to get started with Ansible</h2>
+                    <span class="date"> 12/21/2023 </span>
+                </header>
+                <body>
+                    <a href="BaseCopy.html" class="image main"><img src="images/pic02.jpg" alt="" /></a>
+                    
+                    <p>
+                    Managing multiple server endpoints, few tools are as versatile as Ansible. Operating over the Secure Shell Protocol (SSH), Ansible sends commands to all your servers. Its primary focus is Linux machines, 
+                    but it can also handle Windows and MacOS. Ansible is an open-source tool, 
+                    well-supported by Red Hat's extensive documentation and community forums.
+                    This article will only scratch the surface of what Ansible is capable of.
+                    </p>
+
+                    <h2>Prerequisites:</h2>
+
+                        <p>Before we get started, be sure to have the prerequisites.</p>
+
+                        <ol>
+                            <li><strong>Linux Host:</strong> Ansible requires a Linux machine, but it can be installed on Windows with WSL.</li>
+
+                            <li><strong>Sudo Privileges:</strong> Not only for the host but also the account on the endpoint machines (more on this later).</li>
+
+                            <li><strong>Static Addresses:</strong> Each server needs a static address. We will create a list of IPs for Ansible to target, and they should remain the same for ease of management.</li>
+
+                            <li><strong>Text Editor:</strong>Prefer VSCode; there are Ansible Extensions that greatly help in developing files for Ansible.</li>
+                        </ol>
+                        <p>
+                            On our host machine, we will start by updating the repositories, 
+                            upgrading packages, and installing Ansible. For this post, I will be using the apt 
+                            package manager and Ubuntu Linux. If you use a different package manager or distribution, 
+                            the commands are usually similar, but refer to the documentation for specifics.
+                        </p>
+
+                    <h3> On your host:</h3>
+
+<pre>
+    <code>
+sudo apt update && sudo apt upgrade -y
+sudo apt install ansible
+    </code>
+</pre>
+                    
+                    <p> 
+                    Ansible should now be available on our host machine. Now we need to set up our remote machine. 
+                    All that is necessary is a user account with a password. For this example, we will give the endpoint sudo privileges.
+                    In a more secure environment, you should generate SSH keys, and Ansible can use that for SSH authentication.
+                    </p>
+
+                    <h3>On the Remote Endpoint:</h3>
+<pre>
+    <code>
+sudo adduser ansibleuser
+sudo passwd ansibleuser
+# You will be prompted to create a password
+sudo usermod -aG sudo ansibleuser
+# If you do not know the IP address of this machine
+ifconfig
+# or
+ip addr
+    </code>
+</pre>
+                    <h3> On your host:</h3>
+
+                    <p>
+                        We will create some folders and files on our host computer.
+                        Make your project folder named "Ansible," and in that folder, create a file named "inventory.ini."
+                        Open inventory.ini in VSCode and write the following:
+                    </p>
+
+                    
+<pre>
+    <code>
+[endpoints]
+192.168.10.1
+192.168.10.2
+192.168.10.3
+[endpoints:vars]
+ansible_user=ansibleuser
+ansible_ssh_pass=password123
+    </code>
+</pre>
+                        
+
+                    <p>
+                        In this file, you can add as many endpoint IP addresses as you have endpoints.
+                        Here, I have added three. Replace 192.168.x.x with each IP address of your endpoints.
+                        As said before, using the user password in plain text is not secure for a production environment, but it will work for this example.
+                    </p>
+
+                        <p>
+                            Finally, we can run what is known as an Ad Hoc command, 
+                            which means we will be running a single command to get a result, 
+                            rather than writing code (known as an Ansible playbook):
+                        </p>
+
+                        
+<pre>
+    <code>
+ansible endpoints -m ping -i inventory.ini
+    </code>
+</pre>
+                        
+
+                        <p>
+                            If everything is set up correctly, you should send a ping command out to each
+                            endpoint in your inventory and get a successful "pong" response back.
+                            This is a very basic introduction to how Ansible works. Below, I will link to Ansible Docs,
+                            and you can see how complex of a tool Ansible can be. There are few things Ansible cannot handle;
+                            I have even used Ansible to deploy and manage Docker containers before!
+                        </p>
+
+                        <ul>
+                            <li><a href="https://docs.ansible.com/ansible/latest/getting_started/index.html" target="_blank"> Getting started with Ansible, and Docs. </a></li>
+                            <li>Check out my example on <a href="https://github.com/amcomp/CodeonSite/tree/main/Ansible" target="_blank"> GitHub</a></li>
+                        </ul>
+                        
+
+                </body>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <section class="split contact">
+                <section>
+                    <h3>Email</h3>
+                    <p><a href="mailto:mathew.titus@outlook.com">mathew.titus@outlook.com</p></p>
+                </section>
+                <section>
+                    <h3>Social</h3>
+                    <ul class="icons">
+                        <li><a href="https://www.linkedin.com/in/mathew-titus/" class="icon brands alt fa-linkedin"><span
+                                    class="label">Linkedin</span></a></li>
+                        <li><a href="https://github.com/amcomp" class="icon brands fa-github"><span
+                                    class="label">GitHub</span></a></li>
+                    </ul>
+                </section>
+            </section>
+        </footer>
+
+				<!-- Copyright -->
+				<div id="copyright">
+					<ul><li> Portfolio </li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+				</div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
