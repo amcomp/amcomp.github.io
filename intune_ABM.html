@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>How to Connect Intune with Apple Buisness Manager</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <a href="index.html" class="logo">SimpleSysAdmin</a>
+        </header>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul class="links">
+                <li class="active"><a href="index.html">Portfolio</a></li>
+                <li class="active"><a href="contact.html">Contact</a></li>
+            </ul>
+            <ul class="icons">
+                <li><a href="https://www.linkedin.com/in/mathew-titus/" class="icon brands alt fa-linkedin"><span
+                            class="label">Linkedin</span></a></li>
+                <li><a href="https://github.com/amcomp" class="icon brands fa-github"><span class="label">GitHub</span></a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main -->
+        <div id="main">
+
+            <!-- Post -->
+            <section class="post">
+                <header class="major">
+                    <h2>How to Connect Intune with Apple Buisness Manager</h2>
+                    <span class="date"> 1/9/2024 </span>
+                </head>
+                <body>
+                    <a href="intune_ABM.html" class="image main"><img src="images/pexels-fauxels-3183197(4).jpg" alt="" /></a>
+                    <p>
+                    Intune is a great tool for device management, but it doesnt stop at Windows devices.
+                    It can also manage Apple Devices, like iPhones, iPads, and Macs. In an enterprise envrionment, you may have a tool called
+                    Apple Buisness Manager. With Some steps we can connect these two tools, so that all of our devices can be managed from a single platform.
+                    </p>
+                    <h2>Prerequisites:</h2>
+
+                    <p>Before we get started, ensure you have the necessary prerequisites:</p>
+
+                    <ol>
+                        <li><strong>Proper Intune Permissions:</strong> In your Lab, you are likely a Global Admin, so permissions are granted already. Otherwise there are Intune specific roles.</li>
+
+                        <li><strong>Access to Apple Buisness Manager:</strong> You need to be a business to get access to this, to my knowldege there is not a lab envrionment for ABM. Do not make changes in an envrionment you do not have the permissions to.</li>
+                    </ol>
+                    <h2>MDM Server</h2>
+                        <p>
+                        This process will involve creating the server and the enrollment token at the same time. 
+                        Have Your Apple Business Manager (ABM) and Intune webpages open together.
+                        </p>
+                        <div>
+                            <ul style="list-style-position: outside; text-align: left;">
+                                <li>
+                                    <strong>Intune</strong>
+                                    <ul>
+                                        <li>Home &gt; Devices &gt; iOS &gt; iOS Enrollment &gt; Enrollment program tokens &gt; Add
+                                            <ul>
+                                                <li>Agree to Microsoft Permissions</li>
+                                                <li>Download your Public key</li>
+                                                <li>Enter the Apple ID you use to sign into ABM</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>Leave this page open</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <ul style="list-style-position: outside; text-align: left;">
+                                <li>
+                                    <strong>Apple</strong>
+                                    <ul>
+                                        <li>Settings &gt; Your MDM Server &gt; + Add
+                                            <ul>
+                                                <li>Name Your Server</li>
+                                                <li>Upload Public Key: Select Choose File &gt; Select the key you downloaded from Intune.</li>
+                                                <li>Save</li>
+                                                <li>Select Download token</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                        </div>
+                        <div>
+                            <ul style="list-style-position: outside; text-align: left;">
+                                <li>
+                                    <strong>Intune</strong>
+                                    <ul>
+                                        <li>Apple Token: Upload the File token file you downloaded from ABM</li>
+                                        <li>Next and Review</li>
+                                        <li>Create</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h2>VPP Token</h2>
+                            <p>
+                            The Volume Purchase Program (VPP) Token is to give your users the ability to install apps from the Company portal, without using the App Store. 
+                            This will also populate your iOS apps section in Intune with all the applications that you have licenses for.
+                            </p>
+                            <ul style="list-style-position: outside; text-align: left;">
+                                <li>
+                                    <strong>Apple</strong>
+                                    <ul>
+                                        <li>Settings &gt; Payments and Billing &gt; Apps and Books &gt; Download Content token</li>
+                                        <ul>
+                                            <li>This token will be used in Intune for Application Deployment.</li>
+                                        </ul>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong>Intune</strong>
+                                    <ul>
+                                        <li>Home &gt; Tenant Admin &gt; Connectors and Tokens &gt; Apple VPP Tokens</li>
+                                        <ul>
+                                            <li>Create and upload token from Apple to here</li>
+                                            <li>Important Setting: Take control of token from another MDM</li>
+                                        </ul>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h2>Device Enrollment Policy</h2>
+                            <p>This tool will define how iPhone Setup Assistant works for your deployments, Some enrollment policy, and which devices to target. Will also need ABM open for a setting.</p>
+                            <ul style="list-style-position: outside; text-align: left;">
+                                <li>
+                                    <strong>Apple</strong>
+                                    <ul>
+                                        <li>Sidebar &gt; Devices &gt; Locate the devices you want managed</li>
+                                        <li>Select a device &gt; edit MDM Server &gt; Select the Server you connected to Intune.</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <strong>Intune</strong>
+                                    <ul>
+                                        <li>Home &gt; Devices &gt; iOS &gt; Enrollment Program Tokens &gt; Select the token you connected to ABM.</li>
+                                        <li>
+                                            Devices. This list synchronizes to ABM, once a sync is complete and you see the devices you specified adding to the Intune MDM Server you're ready for the next step.
+                                            <ul>
+                                                <li>Profiles &gt; Create Profile</li>
+                                                <ul>
+                                                    <li>Name and Describe the profile as you see fit.</li>
+                                                </ul>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <a href="BaseCopy.html" class="image main"><img src="images/ABM_Article/Deviceenrollmentpolicy.png" alt="" /></a>
+                            <ul style="list-style-position: outside; text-align: left;">
+                                <li>If your phones will be single-user, select Enroll with User Affinity. If they are shared devices, select Enroll without User Affinity.</li>
+                                <li>For installing Company Portal with VPP, select the VPP token you configured earlier. I also will not use “Don’t Use VPP”.</li>
+                                <li>For Name Template, you can use whatever you would like, or the two variables I specified. If selecting No for naming, all of the iPhones will be named “iPhone”.</li>
+                                <li>Select Next.</li>
+                            </ul>
+                            <a href="BaseCopy.html" class="image main"><img src="images/ABM_Article/profile.png" alt="" /></a>
+                            <ul style="list-style-position: outside; text-align: left;">
+                                <li>Enter your department name, and number. These can be anything.</li>
+                                <li>Configure the iPhone Setup Assistant settings as your environment needs.</li>
+                                <li>Select Next.</li>
+                                <li>Review and Create.</li>
+                            </ul>
+                         </div>
+                        <p>
+                        iPhone should recognize the management and begin configuring itself to your settings, after you enter a Wi-Fi Password during Setup Assistant. 
+                        After you have a successful deployment, setting up apps for users, and device configuring policy is a great next step. 
+                        </p>
+                </body>
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <section class="split contact">
+                <section>
+                    <h3>Email</h3>
+                    <p><a href="mailto:mathew.titus@outlook.com">mathew.titus@outlook.com</a></p>
+                </section>
+                <section>
+                    <h3>Social</h3>
+                    <ul class="icons">
+                        <li><a href="https://www.linkedin.com/in/mathew-titus/" class="icon brands alt fa-linkedin"><span
+                                    class="label">Linkedin</span></a></li>
+                        <li><a href="https://github.com/amcomp" class="icon brands fa-github"><span
+                                    class="label">GitHub</span></a></li>
+                    </ul>
+                </section>
+            </section>
+        </footer>
+
+				<!-- Copyright -->
+				<div id="copyright">
+					<ul><li> Portfolio </li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+				</div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
