@@ -1,0 +1,10 @@
+^C:\AMCOMP.GITHUB.IO\BUILD\WINDOWS\X64\CMAKEFILES\F26DD918647506AC88DF1528562491DC\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
