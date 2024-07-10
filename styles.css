@@ -20,12 +20,24 @@ header {
 
 .maintext {
     display: flex; /* Enable flexbox for vertical centering */
-    flex-direction: row; /* Align items vertically */
-    justify-content: center; /* Center vertically */
+    flex-direction: column; /* Align items vertically */
+    justify-content: center;
+    text-align: center; /* Center vertically */
     align-items: center; /* Center horizontally */
     height: calc(100vh - 30px); /* Adjust height to take up remaining space */
     color:  #ffffff;
 }
+
+.maintext h1, .maintext h2 {
+    display: block;
+    margin: 0; /* Remove default margins */
+    padding: 0; /* Remove default padding */
+}
+
+.maintext h2 {
+    margin-top: 10px; /* Adjust spacing between title and subtitle */
+}
+
 
 .github-icon {
     position: absolute;
