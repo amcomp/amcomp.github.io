@@ -89,11 +89,12 @@ header {
     list-style: none;
     display: flex;
     margin: 0;
-    padding: 0;
+    padding: 1;
 }
 
 .nav-links li {
     margin: 0 1em;
+    text-align: left;
 }
 
 .nav-links a {
@@ -141,7 +142,6 @@ header {
         width: 100%;
     }
     .nav-links li {
-        text-align: center;
         margin: 1em 0;
     }
 
@@ -165,7 +165,6 @@ header {
         width: 100%;
     }
     .nav-links li {
-        text-align: center;
         margin: 1em 0;
     }
 
@@ -191,7 +190,6 @@ header {
         width: 100%;
     }
     .nav-links li {
-        text-align: center;
         margin: 1em 0;
     }
 
@@ -215,7 +213,6 @@ header {
         width: 100%;
     }
     .nav-links li {
-        text-align: center;
         margin: 1em 0;
     }
 
@@ -241,7 +238,6 @@ header {
         width: 100%;
     }
     .nav-links li {
-        text-align: center;
         margin: 1em 0;
     }
 
