@@ -1,7 +1,6 @@
 # Todo
 ## All Issues are found in deplyed app
-- Title and Subtitle on index are running together
-- Padding/spacing is not correct for some words in the hamburger menu
-- The hamburger menu only works in index
-    - I think because only index has JS referenced
-- Quotes need removed from the Titles of each page
+- Would like to round the edges on the app bar
+- Need to design a posts page
+- Design the Blog boxes with posts inside of them
+- Add the posts I have already written
