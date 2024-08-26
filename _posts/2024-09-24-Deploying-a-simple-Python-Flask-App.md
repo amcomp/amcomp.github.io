@@ -1,10 +1,11 @@
 ---
 layout: post
 title: "Deploying a simple Python Flask App"
-date: 2017-04-06 13:32:20 +0300
+date: 2024-8-25 13:32:20 +0300
 description: How to get a simple Python Flask App started # Add post description (optional)
 img: photo-1672308627194-9a2c28daa17a.jpg  # Add image post (optional)
 ---
+
 
 When building more complex apps, the design will typically include a front end (the part you look at) and a back end (where the data comes from). When an application is structured like this, you need a way to connect the two parts into one larger application. This connection is called API or Application Programming Interface. System Administrators and DevOps engineers are familiar with APIs for connecting new vendors, services, and apps. APIs are also used in scripting for automation when using data from the internet. In this article, I will briefly describe a simple deployment of Flask, a Python tool which can be a part of deploying self-hosted API and websites, to quickly get started learning a critical layer in application deployment. 
 
