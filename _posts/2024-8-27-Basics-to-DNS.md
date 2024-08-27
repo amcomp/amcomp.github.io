@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Basics of DNS"
-date: 2024-08-27 13:32:20 +0300
+date: 2024-08-27 00:00:00 +0300
 description: Basics of DNS # Add post description (optional)
 img: pexels-pixabay-163064.jpg # Add image post (optional)
 ---
