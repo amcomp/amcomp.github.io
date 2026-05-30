@@ -1,4 +1,8 @@
-baseURL = 'https://example.org/'
-locale = 'en-us'
+baseURL = 'https://amcomp.github.io/'
+languageCode = 'en-us'
 title = 'BlackboxLab'
 theme = "PaperMod"
+
+[caches]
+  [caches.images]
+    dir = ":cacheDir/images"

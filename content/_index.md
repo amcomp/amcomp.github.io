@@ -5,8 +5,8 @@ title: "Home"
 # Mathew 
 **Systems & Automation Engineer**
 
-I'm an IT infrastructure engineer based in Indianapolis, working across M365,
-Active Directory, Exchange Online, and network security for multi-tenant
+I'm an IT engineer based in Indianapolis, working across M365,
+Active Directory, and network for multi-tenant
 enterprise environments. I automate the repetitive stuff so the hard problems
 get more attention.
 
