@@ -6,10 +6,9 @@ title: "Home"
 
 **Systems Administrator | Microsoft 365 | Automation | Infrastructure**
 
-I'm a Systems Administrator based in Indianapolis, supporting Microsoft 365, identity, email, and infrastructure across multiple client environments. My work focuses on solving complex operational problems, automating repetitive tasks, and building reliable systems that scale.
+I'm a Systems Administrator based in Indianapolis, specializing in Microsoft 365, identity management, automation, and infrastructure. I support multiple client environments across cloud and on-premises platforms, with a focus on troubleshooting complex issues, improving operational efficiency, and building repeatable solutions through automation. Beyond the technical work, I prioritize clear communication and stakeholder alignment, helping drive projects and incidents from discovery to resolution.
 
-I spend most of my time working with Microsoft 365, Active Directory, Exchange, PowerShell, and networking technologies, while maintaining a homelab used to explore automation, monitoring, virtualization, and infrastructure design.
-
+Outside of production environments, I maintain a homelab where I experiment with virtualization, networking, monitoring, security, and self-hosted services.
 ---
 
 ## Core Technologies
@@ -39,6 +38,7 @@ I spend most of my time working with Microsoft 365, Active Directory, Exchange, 
 - IPsec VPN
 - BGP
 - DNS Administration
+- CloudFlare
 - Multi-site Network Design
 
 ### Homelab & Self-Hosted Services
@@ -49,14 +49,12 @@ I spend most of my time working with Microsoft 365, Active Directory, Exchange, 
 - Wazuh
 - AdGuard Home
 - Docker
+- Homepage
+- Windows Server (Active Directory, DNS, File Services)
 
 ---
 
 ## Featured Projects
-
-### Automated Workstation Deployment Framework
-
-A PowerShell-based deployment system that installs, validates, and configures workstation software from a JSON-driven configuration. Designed to reduce setup time and standardize deployments across environments.
 
 ### Microsoft 365 & Hybrid Identity Troubleshooting
 
@@ -81,13 +79,11 @@ An ongoing homelab environment used to test virtualization, network segmentation
 
 ## Certifications
 
-- CompTIA A+
-- CompTIA Network+
-- CompTIA Security+
+- CompTIA A+ (Active)
+- CompTIA Network+ (Active)
+- CompTIA Security+ (Active)
 
 ---
 
 ## Connect
-
-- [GitHub](https://github.com/amcomp)
-- [LinkedIn](https://www.linkedin.com/)
+[GitHub](https://github.com/amcomp) · [LinkedIn](https://www.linkedin.com/feed/)
