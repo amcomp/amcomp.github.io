@@ -31,4 +31,4 @@ get more attention.
 
 ---
 
-[GitHub](#) · [LinkedIn](#)
+[GitHub](https://github.com/amcomp) · [LinkedIn](https://www.linkedin.com/feed/)
