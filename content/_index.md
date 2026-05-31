@@ -4,7 +4,7 @@ title: "Home"
 
 # Mathew
 
-**Systems Administrator | Microsoft 365 | Automation | Infrastructure**
+**Systems Administrator | Identity | Automation | Infrastructure**
 
 I'm a Systems Administrator based in Indianapolis, specializing in Microsoft 365, identity management, automation, and infrastructure. I support multiple client environments across cloud and on-premises platforms, with a focus on troubleshooting complex issues, improving operational efficiency, and building repeatable solutions through automation. Beyond the technical work, I prioritize clear communication and stakeholder alignment, helping drive projects and incidents from discovery to resolution.
 
