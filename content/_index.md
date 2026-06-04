@@ -57,9 +57,10 @@ Outside of production environments, I maintain a homelab where I experiment with
 
 ## Featured Projects
 
-### Microsoft 365 & Hybrid Identity Troubleshooting
+### 365 Identity lifecycle management
+A repository of scripts to create, manage, and decomission user objects in 365.
 
-Documentation, tooling, and repeatable processes developed while resolving synchronization, authentication, Exchange, and Entra ID issues in hybrid environments.
+[Identity-lifecycle](https://github.com/amcomp/Identity-lifecycle)
 
 ### Infrastructure & Networking Lab
 
